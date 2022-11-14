@@ -55,4 +55,14 @@ class User extends Authenticatable
             ->orWhere('email', $username)
             ->first();
     }
+
+    /**
+     * Get the role that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

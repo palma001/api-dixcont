@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class PaymentMethod extends Model
+class PaymentMethod extends Base
 {
-    use HasFactory;
+    /**
+     * Get the invoicePayments that owns the PaymentMethod
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function invoicePayments()
+    {
+        return $this->hasMany(InvoicePayment::class,);
+    }
 }
