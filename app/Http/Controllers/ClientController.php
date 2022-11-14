@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response()->json(User::all(), 200);
+        //
     }
 
     /**
@@ -36,65 +35,51 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->username = $request->username;
-        $user->role_id = $request->role_id;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
-        return response()->json($user, 201);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Client $client)
     {
-        return response()->json($user, 200);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Client $client)
     {
-
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Client $client)
     {
-        $user->name = $request->name;
-        $user->username = $request->username;
-        $user->role_id = $request->role_id;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->update();
-        return response()->json($user, 200);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Client $client)
     {
-        $user->delete();
-        return response()->json($user, 200);
+        //
     }
 }

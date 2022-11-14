@@ -26,4 +26,14 @@ Route::group([
     'middleware' => 'auth:api',
 ], function ($router) {
     $router->resource('users', UserController::class);
+    $router->resource('roles', RoleController::class);
+    $router->resource('products', ProductController::class);
+    $router->resource('invoices', InvoiceController::class);
+    $router->resource('categories', CategoryController::class);
+    $router->resource('payment-methods', PaymentMethodController::class);
+    $router->resource('coins', CoinController::class);
+    $router->resource('invoice-types', InvoiceTypeController::class);
+    $router->resource('clients', ClientController::class);
+    $router->resource('sellers', SellerController::class);
+    $router->resource('tables', TableController::class);
 });
