@@ -9,7 +9,7 @@ class InvoicePayment extends Base
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function invoices()
+    public function invoice()
     {
         return $this->belongsTo(Invoice::class);
     }

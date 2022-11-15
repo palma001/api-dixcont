@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
@@ -14,7 +15,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Client::all(), 200);
     }
 
     /**
@@ -35,51 +36,65 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client = new Client();
+        $client->name = $request->name;
+        $client->clientname = $request->clientname;
+        $client->role_id = $request->role_id;
+        $client->email = $request->email;
+        $client->password = Hash::make($request->password);
+        $client->save();
+        return response()->json($client, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Client  $client
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(Client $client)
     {
-        //
+        return response()->json($client, 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Client  $client
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Client $client)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Client  $client
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $client->name = $request->name;
+        $client->clientname = $request->clientname;
+        $client->role_id = $request->role_id;
+        $client->email = $request->email;
+        $client->password = Hash::make($request->password);
+        $client->update();
+        return response()->json($client, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Client  $client
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return response()->json($client, 200);
     }
 }

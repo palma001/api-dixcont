@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePaymentMethodRequest;
-use App\Http\Requests\UpdatePaymentMethodRequest;
 use App\Models\PaymentMethod;
+use Illuminate\Http\Request;
 
 class PaymentMethodController extends Controller
 {
@@ -15,7 +14,7 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(PaymentMethod::all(), 200);
     }
 
     /**
@@ -31,56 +30,64 @@ class PaymentMethodController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePaymentMethodRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePaymentMethodRequest $request)
+    public function store(Request $request)
     {
-        //
+        $paymentMethod = new PaymentMethod();
+        $paymentMethod->name = $request->name;
+        $paymentMethod->user_created_id = $request->user_created_id;
+        $paymentMethod->save();
+        return response()->json($paymentMethod, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PaymentMethod  $paymentMethod
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(PaymentMethod $paymentMethod)
     {
-        //
+        return response()->json($paymentMethod, 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PaymentMethod  $paymentMethod
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit(PaymentMethod $paymentMethod)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePaymentMethodRequest  $request
-     * @param  \App\Models\PaymentMethod  $paymentMethod
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePaymentMethodRequest $request, PaymentMethod $paymentMethod)
+    public function update(Request $request, PaymentMethod $paymentMethod)
     {
-        //
+        $paymentMethod->name = $request->name;
+        $paymentMethod->user_updated_id = $request->user_updated_id;
+        $paymentMethod->update();
+        return response()->json($paymentMethod, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PaymentMethod  $paymentMethod
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(PaymentMethod $paymentMethod)
     {
-        //
+        $paymentMethod->delete();
+        return response()->json($paymentMethod, 200);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Seller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class SellerController extends Controller
 {
@@ -14,7 +15,7 @@ class SellerController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Seller::all(), 200);
     }
 
     /**
@@ -35,51 +36,65 @@ class SellerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $seller = new Seller();
+        $seller->name = $request->name;
+        $seller->sellername = $request->sellername;
+        $seller->role_id = $request->role_id;
+        $seller->email = $request->email;
+        $seller->password = Hash::make($request->password);
+        $seller->save();
+        return response()->json($seller, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Seller  $seller
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(Seller $seller)
     {
-        //
+        return response()->json($seller, 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Seller  $seller
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Seller $seller)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Seller  $seller
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Seller $seller)
     {
-        //
+        $seller->name = $request->name;
+        $seller->sellername = $request->sellername;
+        $seller->role_id = $request->role_id;
+        $seller->email = $request->email;
+        $seller->password = Hash::make($request->password);
+        $seller->update();
+        return response()->json($seller, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Seller  $seller
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Seller $seller)
     {
-        //
+        $seller->delete();
+        return response()->json($seller, 200);
     }
 }

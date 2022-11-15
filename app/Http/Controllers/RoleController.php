@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreRoleRequest;
-use App\Http\Requests\UpdateRoleRequest;
 use App\Models\Role;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RoleController extends Controller
 {
@@ -15,7 +15,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Role::all(), 200);
     }
 
     /**
@@ -31,56 +31,66 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreRoleRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRoleRequest $request)
+    public function store(Request $request)
     {
-        //
+        $role = new Role();
+        $role->name = $request->name;
+        $role->acronym = $request->acronym;
+        $role->user_created_id = $request->user_created_id;
+        $role->save();
+        return response()->json($role, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(Role $role)
     {
-        //
+        return response()->json($role, 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Role $role)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateRoleRequest  $request
-     * @param  \App\Models\Role  $role
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRoleRequest $request, Role $role)
+    public function update(Request $request, Role $role)
     {
-        //
+        $role->name = $request->name;
+        $role->acronym = $request->acronym;
+        $role->user_updated_id = $request->user_updated_id;
+        $role->update();
+        return response()->json($role, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Role  $role
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        return response()->json($role, 200);
     }
 }

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTableRequest;
-use App\Http\Requests\UpdateTableRequest;
 use App\Models\Table;
+use Illuminate\Http\Request;
 
 class TableController extends Controller
 {
@@ -15,7 +14,7 @@ class TableController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Table::all(), 200);
     }
 
     /**
@@ -31,56 +30,66 @@ class TableController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTableRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTableRequest $request)
+    public function store(Request $request)
     {
-        //
+        $table = new Table();
+        $table->name = $request->name;
+        $table->number = $request->number;
+        $table->user_created_id = $request->user_created_id;
+        $table->save();
+        return response()->json($table, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Table  $table
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(Table $table)
     {
-        //
+        return response()->json($table, 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Table  $table
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Table $table)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTableRequest  $request
-     * @param  \App\Models\Table  $table
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTableRequest $request, Table $table)
+    public function update(Request $request, Table $table)
     {
-        //
+        $table->name = $request->name;
+        $table->number = $request->number;
+        $table->user_updated_id = $request->user_updated_id;
+        $table->update();
+        return response()->json($table, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Table  $table
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Table $table)
     {
-        //
+        $table->delete();
+        return response()->json($table, 200);
     }
 }
