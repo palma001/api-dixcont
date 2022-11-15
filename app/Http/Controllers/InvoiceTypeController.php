@@ -12,9 +12,12 @@ class InvoiceTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(InvoiceType::all(), 200);
+        $invoiceTypes = InvoiceType::filters($request->all())
+            ->search($request->all());
+
+        return response()->json($invoiceTypes, 200);
     }
 
     /**
