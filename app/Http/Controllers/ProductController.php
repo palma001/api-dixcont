@@ -12,9 +12,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Product::all(), 200);
+        $products = Product::with('category:id,name')
+            ->filters($request->all())
+            ->search($request->all());
+
+        return response()->json($products, 200);
     }
 
     /**
@@ -38,6 +42,7 @@ class ProductController extends Controller
         $product = new Product();
         $product->name = $request->name;
         $product->price = $request->price;
+        $product->barcode = $request->barcode;
         $product->category_id = $request->category_id;
         $product->user_created_id = $request->user_created_id;
         $product->save();
@@ -77,6 +82,7 @@ class ProductController extends Controller
     {
         $product->name = $request->name;
         $product->price = $request->price;
+        $product->barcode = $request->barcode;
         $product->category_id = $request->category_id;
         $product->user_created_id = $request->user_created_id;
         $product->update();

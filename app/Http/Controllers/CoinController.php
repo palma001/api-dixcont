@@ -12,9 +12,11 @@ class CoinController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Coin::all(), 200);
+        $coins = Coin::filters($request->all())
+            ->search($request->all());
+        return response()->json($coins, 200);
     }
 
     /**

@@ -8,6 +8,8 @@ class ProductService
 {
     public function saveImages(Product $product, $images)
     {
-        $product->images()->createMany($images);
+        if ($images) {
+            $product->images()->createMany($images);
+        }
     }
 }

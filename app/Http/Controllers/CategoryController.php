@@ -12,9 +12,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Category::all(), 200);
+        $categories = Category::filters($request->all())
+            ->search($request->all());
+
+        return response()->json($categories, 200);
     }
 
     /**

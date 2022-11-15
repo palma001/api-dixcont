@@ -12,9 +12,11 @@ class PaymentMethodController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(PaymentMethod::all(), 200);
+        $paymentMethods = PaymentMethod::filters($request->all())
+            ->search($request->all());
+        return response()->json($paymentMethods, 200);
     }
 
     /**
