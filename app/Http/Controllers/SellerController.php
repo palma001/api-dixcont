@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\RoleAcronym;
+use App\Models\Role;
 use App\Models\Seller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class SellerController extends Controller
 {
+    protected $role;
+
+    public function __construct()
+    {
+        $this->role = Role::where('acronym', RoleAcronym::SELLER)->first();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,8 +47,8 @@ class SellerController extends Controller
     {
         $seller = new Seller();
         $seller->name = $request->name;
-        $seller->sellername = $request->sellername;
-        $seller->role_id = $request->role_id;
+        $seller->username = $request->username;
+        $seller->role_id = $this->role->id;
         $seller->email = $request->email;
         $seller->password = Hash::make($request->password);
         $seller->save();
@@ -78,8 +87,8 @@ class SellerController extends Controller
     public function update(Request $request, Seller $seller)
     {
         $seller->name = $request->name;
-        $seller->sellername = $request->sellername;
-        $seller->role_id = $request->role_id;
+        $seller->username = $request->username;
+        $seller->role_id = $this->role->id;
         $seller->email = $request->email;
         $seller->password = Hash::make($request->password);
         $seller->update();

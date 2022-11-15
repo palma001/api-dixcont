@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\RoleAcronym;
 use App\Models\Client;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
+    protected $role;
+
+    public function __construct()
+    {
+        $this->role = Role::where('acronym', RoleAcronym::SELLER)->first();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,8 +46,8 @@ class ClientController extends Controller
     {
         $client = new Client();
         $client->name = $request->name;
-        $client->clientname = $request->clientname;
-        $client->role_id = $request->role_id;
+        $client->username = $request->username;
+        $client->role_id = $this->role->id;
         $client->email = $request->email;
         $client->password = Hash::make($request->password);
         $client->save();
@@ -78,8 +86,8 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
         $client->name = $request->name;
-        $client->clientname = $request->clientname;
-        $client->role_id = $request->role_id;
+        $client->username = $request->username;
+        $client->role_id = $this->role->id;
         $client->email = $request->email;
         $client->password = Hash::make($request->password);
         $client->update();
