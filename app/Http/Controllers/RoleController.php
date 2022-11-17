@@ -13,9 +13,11 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Role::all(), 200);
+        $roles = Role::filters($request->all())
+            ->search($request->all());
+        return response()->json($roles, 200);
     }
 
     /**

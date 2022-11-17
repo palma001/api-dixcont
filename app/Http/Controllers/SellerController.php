@@ -22,9 +22,12 @@ class SellerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Seller::all(), 200);
+        $sellers = Seller::filters($request->all())
+            ->where('role_id', $this->role->id)
+            ->search($request->all());
+        return response()->json($sellers, 200);
     }
 
     /**

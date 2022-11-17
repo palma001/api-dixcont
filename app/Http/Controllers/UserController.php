@@ -13,9 +13,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(User::all(), 200);
+        $users = User::with('role:id,name')->filters($request->all())
+            ->search($request->all());
+        return response()->json($users, 200);
     }
 
     /**

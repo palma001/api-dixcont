@@ -14,16 +14,19 @@ class ClientController extends Controller
 
     public function __construct()
     {
-        $this->role = Role::where('acronym', RoleAcronym::SELLER)->first();
+        $this->role = Role::where('acronym', RoleAcronym::CLIENT)->first();
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Client::all(), 200);
+        $clients = Client::filters($request->all())
+            ->where('role_id', $this->role->id)
+            ->search($request->all());
+        return response()->json($clients, 200);
     }
 
     /**

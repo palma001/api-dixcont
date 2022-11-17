@@ -12,9 +12,11 @@ class TableController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Table::all(), 200);
+        $tables = Table::filters($request->all())
+            ->search($request->all());
+        return response()->json($tables, 200);
     }
 
     /**
