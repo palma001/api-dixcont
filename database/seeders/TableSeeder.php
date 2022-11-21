@@ -18,17 +18,14 @@ class TableSeeder extends Seeder
         DB::table('tables')->insert([
             [
                 'name' => 'Mesa numero 1',
-                'number' => 1,
                 'user_created_id' => 1
             ],
             [
                 'name' => 'Mesa numero 2',
-                'number' => 2,
                 'user_created_id' => 1
             ],
             [
                 'name' => 'Mesa numero 3',
-                'number' => 3,
                 'user_created_id' => 1
             ]
         ]);

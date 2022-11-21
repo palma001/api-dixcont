@@ -39,7 +39,10 @@ class TableController extends Controller
     {
         $table = new Table();
         $table->name = $request->name;
-        $table->number = $request->number;
+        $table->y = $request->y;
+        $table->x = $request->x;
+        $table->height = $request->height;
+        $table->width = $request->width;
         $table->user_created_id = $request->user_created_id;
         $table->save();
         return response()->json($table, 201);
@@ -77,7 +80,10 @@ class TableController extends Controller
     public function update(Request $request, Table $table)
     {
         $table->name = $request->name;
-        $table->number = $request->number;
+        $table->y = $request->y;
+        $table->x = $request->x;
+        $table->height = $request->height;
+        $table->width = $request->width;
         $table->user_updated_id = $request->user_updated_id;
         $table->update();
         return response()->json($table, 200);
