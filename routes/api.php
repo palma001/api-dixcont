@@ -36,4 +36,5 @@ Route::group([
     $router->resource('clients', ClientController::class);
     $router->resource('sellers', SellerController::class);
     $router->resource('tables', TableController::class);
+    $router->resource('living-rooms', LivingRoomController::class);
 });

@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             PaymentMethodSeeder::class,
             InvoiceTypeSeeder::class,
             ProductSeeder::class,
+            LivingRoomSeeder::class,
             TableSeeder::class
         ]);
     }

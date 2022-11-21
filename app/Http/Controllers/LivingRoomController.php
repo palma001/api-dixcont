@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Table;
+use App\Models\LivingRoom;
 use Illuminate\Http\Request;
 
-class TableController extends Controller
+class LivingRoomController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class TableController extends Controller
      */
     public function index(Request $request)
     {
-        $tables = Table::filters($request->all())
+        $livingRooms = LivingRoom::filters($request->all())
             ->search($request->all());
-        return response()->json($tables, 200);
+        return response()->json($livingRooms, 200);
     }
 
     /**
@@ -37,16 +37,11 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
-        $table = new Table();
-        $table->name = $request->name;
-        $table->living_room_id = $request->living_room_id;
-        $table->y = $request->y;
-        $table->x = $request->x;
-        $table->height = $request->height;
-        $table->width = $request->width;
-        $table->user_created_id = $request->user_created_id;
-        $table->save();
-        return response()->json($table, 201);
+        $livingRoom = new LivingRoom();
+        $livingRoom->name = $request->name;
+        $livingRoom->user_created_id = $request->user_created_id;
+        $livingRoom->save();
+        return response()->json($livingRoom, 201);
     }
 
     /**
@@ -55,9 +50,9 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Table $table)
+    public function show(LivingRoom $livingRoom)
     {
-        return response()->json($table, 200);
+        return response()->json($livingRoom, 200);
     }
 
     /**
@@ -66,7 +61,7 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Table $table)
+    public function edit(LivingRoom $livingRoom)
     {
 
     }
@@ -78,17 +73,12 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Table $table)
+    public function update(Request $request, LivingRoom $livingRoom)
     {
-        $table->name = $request->name;
-        $table->living_room_id = $request->living_room_id;
-        $table->y = $request->y;
-        $table->x = $request->x;
-        $table->height = $request->height;
-        $table->width = $request->width;
-        $table->user_updated_id = $request->user_updated_id;
-        $table->update();
-        return response()->json($table, 200);
+        $livingRoom->name = $request->name;
+        $livingRoom->user_updated_id = $request->user_updated_id;
+        $livingRoom->update();
+        return response()->json($livingRoom, 200);
     }
 
     /**
@@ -97,9 +87,9 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Table $table)
+    public function destroy(LivingRoom $livingRoom)
     {
-        $table->delete();
-        return response()->json($table, 200);
+        $livingRoom->delete();
+        return response()->json($livingRoom, 200);
     }
 }

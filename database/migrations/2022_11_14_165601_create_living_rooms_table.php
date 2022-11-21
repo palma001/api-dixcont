@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tables', function (Blueprint $table) {
+        Schema::create('living_rooms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('y')->nullable();
-            $table->integer('x')->nullable();
-            $table->integer('width')->nullable();
-            $table->integer('height')->nullable();
-            $table->foreignId('living_room_id')->unsigned();
             $table->foreignId('user_created_id')->unsigned('users');
             $table->foreignId('user_updated_id')->nullable()->unsigned('users');
             $table->timestamps();
@@ -35,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tables');
+        Schema::dropIfExists('living_rooms');
     }
 };
