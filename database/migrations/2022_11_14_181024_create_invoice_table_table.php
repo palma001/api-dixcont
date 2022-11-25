@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('invoice_id')->unsigned();
             $table->foreignId('table_id')->unsigned();
+            $table->enum('status', ['busy', 'unoccupied'])->default('busy');
             $table->timestamps();
             $table->softDeletes();
         });

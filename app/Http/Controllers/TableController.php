@@ -14,7 +14,8 @@ class TableController extends Controller
      */
     public function index(Request $request)
     {
-        $tables = Table::filters($request->all())
+        $tables = Table::with('invoices')
+            ->filters($request->all())
             ->search($request->all());
         return response()->json($tables, 200);
     }

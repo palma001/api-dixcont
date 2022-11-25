@@ -14,7 +14,8 @@ class Invoice extends Model
      */
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)
+            ->using(InvoiceProduct::class);
     }
     /**
      * Get the coin that owns the Invoice

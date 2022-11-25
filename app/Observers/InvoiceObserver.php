@@ -18,6 +18,7 @@ class InvoiceObserver
         $service = new InvoiceService();
         $service->saveProducts($invoice, request()->products);
         $service->savePayments($invoice, request()->payments);
+        $service->saveTables($invoice, request()->tables);
     }
 
     /**

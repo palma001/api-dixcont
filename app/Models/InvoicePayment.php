@@ -4,6 +4,13 @@ namespace App\Models;
 
 class InvoicePayment extends Base
 {
+    protected $fillable = [
+        'payment_method_id',
+        'coin_id', 'exchange',
+        'amount',
+        'user_created_id',
+        'user_updated_id'
+    ];
     /**
      * Get the invoice that owns the InvoicePayment
      *

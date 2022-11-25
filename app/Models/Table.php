@@ -5,6 +5,13 @@ namespace App\Models;
 
 class Table extends Base
 {
+    protected $appends = ['status'];
+
+    public function getStatusAttribute()
+    {
+        $status = $this->invoices()->wherePivot('status', 'busy')->first();
+        return $status ? 'busy' : 'unoccupied';
+    }
     /**
      * The invoices that belong to the Table
      *
@@ -12,6 +19,7 @@ class Table extends Base
      */
     public function invoices()
     {
-        return $this->belongsToMany(Invoice::class);
+        return $this->belongsToMany(Invoice::class)
+            ->withPivot('status');
     }
 }
