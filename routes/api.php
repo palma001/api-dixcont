@@ -25,6 +25,8 @@ Route::group([
 Route::group([
     'middleware' => 'auth:api',
 ], function ($router) {
+    $router->post('free-tables', 'TableController@freeTables');
+
     $router->resource('users', UserController::class);
     $router->resource('roles', RoleController::class);
     $router->resource('products', ProductController::class);

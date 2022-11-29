@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Invoice extends Model
+class Invoice extends Base
 {
+    public function getTaxBaseAttributes()
+    {
+        return $this->products->sum(function ($product) {
+            return $product->pivot->price * $product->pivot->amount;
+        });
+    }
     /**
      * The products that belong to the Invoice
      *
@@ -15,7 +18,8 @@ class Invoice extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class)
-            ->using(InvoiceProduct::class);
+            ->using(InvoiceProduct::class)
+            ->wherePivot('amount', 'price', 'igv');
     }
     /**
      * Get the coin that owns the Invoice

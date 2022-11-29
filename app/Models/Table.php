@@ -20,6 +20,6 @@ class Table extends Base
     public function invoices()
     {
         return $this->belongsToMany(Invoice::class)
-            ->withPivot('status');
+            ->withPivot('status', 'id');
     }
 }

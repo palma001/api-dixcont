@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreignId('user_created_id')->unsigned('users');
             $table->foreignId('user_updated_id')->nullable()->unsigned('users');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

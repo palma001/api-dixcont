@@ -12,9 +12,20 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Invoice::all(), 200);
+        $invoices = Invoice::filters($request->all())
+            ->with(
+                'client:id,name',
+                'seller:id,name',
+                'products:id,name',
+                'coin:id,name,symbol',
+                'invoiceType:id,name',
+                'invoicePayments',
+                'tables:id,name'
+            )
+            ->search($request->all());
+        return response()->json($invoices, 200);
     }
 
     /**

@@ -103,4 +103,19 @@ class TableController extends Controller
         $table->delete();
         return response()->json($table, 200);
     }
+    /**
+     * Free the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function freeTables (Request $request)
+    {
+        $table = Table::find($request->id)
+            ->invoices()
+            ->update([
+                'status' => 'unoccupied'
+            ]);
+        return response()->json($table, 200);
+    }
 }
