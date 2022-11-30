@@ -2,13 +2,53 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+
 class Invoice extends Base
 {
-    public function getTaxBaseAttributes()
+    protected $appends = ['tax_base', 'total_igv', 'total', 'date', 'hour', 'total_payments'];
+
+    public function getTaxBaseAttribute()
     {
         return $this->products->sum(function ($product) {
             return $product->pivot->price * $product->pivot->amount;
         });
+    }
+    public function getTotalPaymentsAttribute()
+    {
+        return $this->invoicePayments->sum('amount');
+    }
+    /**
+     * Get invoice igv
+     * @return float
+     */
+    public function getTotalIgvAttribute()
+    {
+        return round(($this->igv * $this->tax_base) / 100, 2);
+    }
+    /**
+     * Get invoice igv
+     * @return float
+     */
+    public function getDateAttribute()
+    {
+        return Carbon::parse($this->created_at)->format('Y-m-d');
+    }
+    /**
+     * Get invoice igv
+     * @return float
+     */
+    public function getHourAttribute()
+    {
+        return Carbon::parse($this->created_at)->format('H:m:s');
+    }
+    /**
+     * Get invoice total
+     * @return float
+     */
+    public function getTotalAttribute()
+    {
+        return $this->tax_base + $this->total_igv;
     }
     /**
      * The products that belong to the Invoice
@@ -18,8 +58,7 @@ class Invoice extends Base
     public function products()
     {
         return $this->belongsToMany(Product::class)
-            ->using(InvoiceProduct::class)
-            ->wherePivot('amount', 'price', 'igv');
+            ->withPivot('amount', 'price', 'igv');
     }
     /**
      * Get the coin that owns the Invoice

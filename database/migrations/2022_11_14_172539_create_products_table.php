@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('barcode')->nullable();
-            $table->string('price');
+            $table->float('price');
             $table->foreignId('category_id')->unsigned();
             $table->foreignId('user_created_id')->unsigned('users');
             $table->foreignId('user_updated_id')->nullable()->unsigned('users');

@@ -18,10 +18,10 @@ class InvoiceController extends Controller
             ->with(
                 'client:id,name',
                 'seller:id,name',
-                'products:id,name',
+                'products',
                 'coin:id,name,symbol',
                 'invoiceType:id,name',
-                'invoicePayments',
+                'invoicePayments.paymentMethod:id,name',
                 'tables:id,name'
             )
             ->search($request->all());
