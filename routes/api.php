@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,4 +38,8 @@ Route::group([
     $router->resource('sellers', SellerController::class);
     $router->resource('tables', TableController::class);
     $router->resource('living-rooms', LivingRoomController::class);
+
+    $router->group(['prefix' => 'reports'], function ($router) {
+        $router->get('payment-totals', [PaymentReportController::class, 'getPaymentTotals']);
+    });
 });
