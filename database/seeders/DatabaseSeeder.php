@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
             'username' => 'test',
+            'role_id' => 1,
             'password' => Hash::make('123456')
         ]);
 
@@ -33,7 +34,9 @@ class DatabaseSeeder extends Seeder
             InvoiceTypeSeeder::class,
             ProductSeeder::class,
             LivingRoomSeeder::class,
-            TableSeeder::class
+            TableSeeder::class,
+            ModuleSeeder::class,
+            ModuleRoleSeeder::class
         ]);
     }
 }

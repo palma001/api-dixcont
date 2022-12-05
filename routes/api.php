@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\PaymentReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +39,9 @@ Route::group([
     $router->resource('clients', ClientController::class);
     $router->resource('sellers', SellerController::class);
     $router->resource('tables', TableController::class);
+    $router->resource('modules', ModuleController::class);
     $router->resource('living-rooms', LivingRoomController::class);
+    $router->resource('invoice-payments', InvoicePaymentController::class);
 
     $router->group(['prefix' => 'reports'], function ($router) {
         $router->get('payment-totals', [PaymentReportController::class, 'getPaymentTotals']);

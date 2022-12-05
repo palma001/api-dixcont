@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreInvoicePaymentRequest;
 use App\Http\Requests\UpdateInvoicePaymentRequest;
 use App\Models\InvoicePayment;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class InvoicePaymentController extends Controller
 {
@@ -13,11 +15,15 @@ class InvoicePaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $invoicePayments = InvoicePayment::filters($request->all())
+            ->betweenDate($request->all())
+            ->filterWhereIn($request->all())
+            ->with('invoice:id', 'paymentMethod:id,name', 'coin:id,name')
+            ->search($request->all());
+        return response()->json($invoicePayments, 200);
     }
-
     /**
      * Show the form for creating a new resource.
      *

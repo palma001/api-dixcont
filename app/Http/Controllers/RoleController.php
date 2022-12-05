@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,6 +17,7 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $roles = Role::filters($request->all())
+            ->with('modules')
             ->search($request->all());
         return response()->json($roles, 200);
     }
@@ -80,6 +82,7 @@ class RoleController extends Controller
         $role->name = $request->name;
         $role->acronym = $request->acronym;
         $role->user_updated_id = $request->user_updated_id;
+        $role->updated_at = Carbon::now();
         $role->update();
         return response()->json($role, 200);
     }

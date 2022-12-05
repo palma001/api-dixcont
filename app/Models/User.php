@@ -143,6 +143,7 @@ class User extends Authenticatable
     {
         return $this->where('username', $username)
             ->orWhere('email', $username)
+            ->with('role')
             ->first();
     }
 

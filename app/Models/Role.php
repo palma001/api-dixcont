@@ -13,4 +13,9 @@ class Role extends Base
     {
         return $this->hasMany(User::class);
     }
+
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class);
+    }
 }
