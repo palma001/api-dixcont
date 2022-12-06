@@ -18,8 +18,8 @@ class ModuleSeeder extends Seeder
         DB::table('modules')
             ->insert([
                 [
-                    'link' => 'Facturar',
-                    'title' => 'Billing',
+                    'link' => 'Billing',
+                    'title' => 'Facturar',
                     'icon' => 'shopping_cart',
                     'user_created_id' => 1
                 ],
