@@ -90,9 +90,9 @@ class ModuleSeeder extends Seeder
                     'user_created_id' => 1
                 ],
                 [
-                    'link' => 'Table',
-                    'title' => 'Mesas',
-                    'icon' => 'table_bar',
+                    'link' => 'LivingRoom',
+                    'title' => 'Sala de estar',
+                    'icon' => 'room_preferences',
                     'user_created_id' => 1
                 ]
             ]);

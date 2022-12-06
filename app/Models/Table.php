@@ -7,6 +7,8 @@ class Table extends Base
 {
     protected $appends = ['status'];
 
+    protected $fillable = ['name', 'width', 'height', 'x', 'y', 'user_updated_id', 'living_room_id', 'user_created_id'];
+
     public function getStatusAttribute()
     {
         $status = $this->invoices()->wherePivot('status', 'busy')->first();

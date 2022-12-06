@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LivingRoom;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LivingRoomController extends Controller
@@ -15,6 +16,7 @@ class LivingRoomController extends Controller
     public function index(Request $request)
     {
         $livingRooms = LivingRoom::filters($request->all())
+            ->with('tables')
             ->search($request->all());
         return response()->json($livingRooms, 200);
     }
@@ -77,6 +79,7 @@ class LivingRoomController extends Controller
     {
         $livingRoom->name = $request->name;
         $livingRoom->user_updated_id = $request->user_updated_id;
+        $livingRoom->updated_at = Carbon::now();
         $livingRoom->update();
         return response()->json($livingRoom, 200);
     }

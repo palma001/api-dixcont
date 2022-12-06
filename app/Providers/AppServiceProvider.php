@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Invoice;
+use App\Models\LivingRoom;
 use App\Models\Product;
 use App\Models\Role;
 use App\Observers\InvoiceObserver;
+use App\Observers\LivingRoomObserver;
 use App\Observers\ProductObserver;
 use App\Observers\RoleObserver;
 use Illuminate\Support\ServiceProvider;
@@ -32,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
         Product::observe(ProductObserver::class);
         Invoice::observe(InvoiceObserver::class);
         Role::observe(RoleObserver::class);
+        LivingRoom::observe(LivingRoomObserver::class);
     }
 }
