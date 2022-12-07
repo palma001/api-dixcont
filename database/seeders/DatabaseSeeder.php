@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             CategorySeeder::class,
             CoinSeeder::class,
+            TaxeSeeder::class,
             PaymentMethodSeeder::class,
             InvoiceTypeSeeder::class,
             ProductSeeder::class,

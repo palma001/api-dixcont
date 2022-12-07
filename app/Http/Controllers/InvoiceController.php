@@ -50,6 +50,7 @@ class InvoiceController extends Controller
         $invoice->exchange_rate = $request->exchange_rate;
         $invoice->invoice_type_id = $request->invoice_type_id;
         $invoice->coin_id = $request->coin_id;
+        $invoice->taxe = $request->taxe;
         $invoice->client_id = $request->client_id;
         $invoice->seller_id = $request->seller_id;
         $invoice->user_created_id = $request->user_created_id;
@@ -91,6 +92,7 @@ class InvoiceController extends Controller
         $invoice->exchange_rate = $request->exchange_rate;
         $invoice->invoice_type_id = $request->invoice_type_id;
         $invoice->coin_id = $request->coin_id;
+        $invoice->taxe = $request->taxe;
         $invoice->client_id = $request->client_id;
         $invoice->seller_id = $request->seller_id;
         $invoice->user_created_id = $request->user_created_id;

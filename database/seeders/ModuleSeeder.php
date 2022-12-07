@@ -94,6 +94,12 @@ class ModuleSeeder extends Seeder
                     'title' => 'Sala de estar',
                     'icon' => 'room_preferences',
                     'user_created_id' => 1
+                ],
+                [
+                    'link' => 'Taxe',
+                    'title' => 'Impuestos',
+                    'icon' => 'generating_tokens',
+                    'user_created_id' => 1
                 ]
             ]);
     }

@@ -68,6 +68,10 @@ class ModuleRoleSeeder extends Seeder
                 [
                     'module_id' => 13,
                     'role_id' => 1
+                ],
+                [
+                    'module_id' => 14,
+                    'role_id' => 1
                 ]
             ]);
     }

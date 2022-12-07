@@ -42,6 +42,7 @@ Route::group([
     $router->resource('modules', ModuleController::class);
     $router->resource('living-rooms', LivingRoomController::class);
     $router->resource('invoice-payments', InvoicePaymentController::class);
+    $router->resource('taxes', TaxeController::class);
 
     $router->group(['prefix' => 'reports'], function ($router) {
         $router->get('payment-totals', [PaymentReportController::class, 'getPaymentTotals']);
