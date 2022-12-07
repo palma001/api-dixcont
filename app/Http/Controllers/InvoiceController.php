@@ -3,10 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
 
 class InvoiceController extends Controller
 {
+    public function printInvoice($id)
+    {
+        $invoice = Invoice::with(
+            'client:id,name',
+            'seller:id,name',
+            'products',
+            'coin:id,name,symbol',
+            'invoiceType:id,name',
+            'invoicePayments.paymentMethod:id,name',
+            'tables:id,name'
+        )->findOrFail($id);
+        $date = Carbon::parse($invoice->created_at)->format('d-m-Y');
+        $hour = Carbon::parse($invoice->created_at)->format('h:mm:ss');
+        $tables = collect($invoice->tables)->implode(', ');
+        $nombreImpresora = "POS-58";
+        $connector = new WindowsPrintConnector($nombreImpresora);
+        $impresora = new Printer($connector);
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
+        $impresora->setTextSize(2, 2);
+        $impresora->text("EL RINCON DE SETIMA S.A.C\n");
+        $impresora->text("Norky`s\n");
+        $impresora->text("R.U.C 20513132248\n");
+        $impresora->text("Jr Sebastian Barranca Nro.1555(2do y \n");
+        $impresora->text("3er Piso.Alt Cdras.7 de Gamarra) -Lima \n");
+        $impresora->text("La victoria \n");
+        $impresora->text("Telefono: Central Delivery: 644-91000\n");
+        $impresora->setJustification(Printer::JUSTIFY_LEFT);
+        $impresora->text("Pedido: {$invoice->id}\n");
+        $impresora->text("Fecha: {$date} {$hour}\n");
+        $impresora->text("Tipo: {$invoice->invoiceType->name}\n");
+        $impresora->text("Mesero: {$invoice->seller->name}\n");
+        $impresora->text("Cliente: {$invoice->client->name}\n");
+        $impresora->text("T/Cambio: {$invoice->exchange_rate}\n\n\n");
+        $impresora->text("Mesa: {$tables}\n");
+        $impresora->feed(5);
+        $impresora->close();
+    }
     /**
      * Display a listing of the resource.
      *

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -48,3 +49,6 @@ Route::group([
         $router->get('payment-totals', [PaymentReportController::class, 'getPaymentTotals']);
     });
 });
+
+
+$router->get('print-invoice/{id}', [InvoiceController::class, 'printInvoice']);
