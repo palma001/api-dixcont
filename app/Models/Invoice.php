@@ -6,7 +6,17 @@ use Carbon\Carbon;
 
 class Invoice extends Base
 {
-    protected $appends = ['tax_base', 'total_taxe', 'total', 'date', 'hour', 'total_payments'];
+    protected $appends = ['tax_base', 'total_taxe', 'total', 'date', 'hour', 'total_payments', 'code'];
+
+    protected $with = [
+        'client:id,name',
+        'seller:id,name',
+        'products',
+        'coin:id,name,symbol',
+        'invoiceType:id,name,acronym_serie',
+        'invoicePayments.paymentMethod:id,name',
+        'tables:id,name'
+    ];
 
     public function getTaxBaseAttribute()
     {
@@ -14,6 +24,13 @@ class Invoice extends Base
             return $product->pivot->price * $product->pivot->amount;
         });
     }
+
+    public function getCodeAttribute()
+    {
+        $code = str_pad($this->id, 6, "0", STR_PAD_LEFT);
+        return "{$this->invoiceType->acronym_serie}{$code}";
+    }
+
     public function getTotalPaymentsAttribute()
     {
         return $this->invoicePayments->sum('amount');

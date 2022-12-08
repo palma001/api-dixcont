@@ -14,6 +14,16 @@ class Table extends Base
         $status = $this->invoices()->wherePivot('status', 'busy')->first();
         return $status ? 'busy' : 'unoccupied';
     }
+
+    /**
+     * Get the livingRoom that owns the Table
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function livingRoom()
+    {
+        return $this->belongsTo(LivingRoom::class);
+    }
     /**
      * The invoices that belong to the Table
      *
