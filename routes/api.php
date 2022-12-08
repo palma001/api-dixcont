@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentReportController;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ Route::group([
     $router->resource('living-rooms', LivingRoomController::class);
     $router->resource('invoice-payments', InvoicePaymentController::class);
     $router->resource('taxes', TaxeController::class);
-
+    $router->get('exchange-rate', [ApiController::class, 'exchangeRate']);
     $router->group(['prefix' => 'reports'], function ($router) {
         $router->get('payment-totals', [PaymentReportController::class, 'getPaymentTotals']);
     });

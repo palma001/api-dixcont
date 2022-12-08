@@ -49,6 +49,7 @@ class ClientController extends Controller
     {
         $client = new Client();
         $client->name = $request->name;
+        $client->document_number = $request->document_number;
         $client->username = $request->username;
         $client->role_id = $this->role->id;
         $client->email = $request->email;
@@ -89,6 +90,7 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
         $client->name = $request->name;
+        $client->document_number = $request->document_number;
         $client->username = $request->username;
         $client->role_id = $this->role->id;
         $client->email = $request->email;
