@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -85,6 +86,7 @@ class ProductController extends Controller
         $product->barcode = $request->barcode;
         $product->category_id = $request->category_id;
         $product->user_created_id = $request->user_created_id;
+        $product->updated_at = Carbon::now();
         $product->update();
         return response()->json($product, 200);
     }
