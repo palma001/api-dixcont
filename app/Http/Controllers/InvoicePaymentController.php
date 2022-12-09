@@ -20,7 +20,7 @@ class InvoicePaymentController extends Controller
         $invoicePayments = InvoicePayment::filters($request->all())
             ->betweenDate($request->all())
             ->filterWhereIn($request->all())
-            ->with('invoice:id', 'paymentMethod:id,name', 'coin:id,name')
+            ->with('invoice:id,invoice_type_id', 'paymentMethod:id,name', 'coin:id,name')
             ->search($request->all());
         return response()->json($invoicePayments, 200);
     }
