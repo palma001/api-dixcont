@@ -81,6 +81,7 @@ class ProductImageController extends Controller
      */
     public function destroy(ProductImage $productImage)
     {
-        //
+        $productImage->delete();
+        return response()->json($productImage, 200);
     }
 }

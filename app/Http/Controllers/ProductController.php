@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::with('category:id,name')
+        $products = Product::with('category:id,name', 'images')
             ->filters($request->all())
             ->search($request->all());
 

@@ -27,7 +27,8 @@ class ProductObserver
      */
     public function updated(Product $product)
     {
-        //
+        $services = new ProductService();
+        $services->saveImages($product, request()->images);
     }
 
     /**

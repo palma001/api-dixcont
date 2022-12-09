@@ -45,6 +45,7 @@ Route::group([
     $router->resource('living-rooms', LivingRoomController::class);
     $router->resource('invoice-payments', InvoicePaymentController::class);
     $router->resource('taxes', TaxeController::class);
+    $router->resource('product-images', ProductImageController::class);
     $router->get('exchange-rate', [ApiController::class, 'exchangeRate']);
     $router->group(['prefix' => 'reports'], function ($router) {
         $router->get('payment-totals', [PaymentReportController::class, 'getPaymentTotals']);
