@@ -100,6 +100,12 @@ class ModuleSeeder extends Seeder
                     'title' => 'Impuestos',
                     'icon' => 'generating_tokens',
                     'user_created_id' => 1
+                ],
+                [
+                    'link' => 'TypeOfService',
+                    'title' => 'Tipo de servicios',
+                    'icon' => 'room_service',
+                    'user_created_id' => 1
                 ]
             ]);
     }

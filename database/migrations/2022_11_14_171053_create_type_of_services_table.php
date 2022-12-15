@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_product', function (Blueprint $table) {
+        Schema::create('type_of_services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('invoice_id')->unsigned();
-            $table->foreignId('product_id')->unsigned();
-            $table->float('amount');
-            $table->float('price');
-            $table->float('discount')->default(0)->nullable();
-            $table->float('taxe');
+            $table->string('name');
+            $table->foreignId('user_created_id')->unsigned('users');
+            $table->foreignId('user_updated_id')->nullable()->unsigned('users');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_product');
+        Schema::dropIfExists('type_of_services');
     }
 };

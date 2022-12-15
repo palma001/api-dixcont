@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\InvoiceType;
+use App\Models\TypeOfService;
 use Illuminate\Http\Request;
 
-class InvoiceTypeController extends Controller
+class TypeOfServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +14,9 @@ class InvoiceTypeController extends Controller
      */
     public function index(Request $request)
     {
-        $invoiceTypes = InvoiceType::filters($request->all())
-            ->with('taxes')
+        $typeOfServices = TypeOfService::filters($request->all())
             ->search($request->all());
-
-        return response()->json($invoiceTypes, 200);
+        return response()->json($typeOfServices, 200);
     }
 
     /**
@@ -39,12 +37,11 @@ class InvoiceTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $invoiceType = new InvoiceType();
-        $invoiceType->name = $request->name;
-        $invoiceType->acronym_serie = $request->acronym_serie;
-        $invoiceType->user_created_id = $request->user_created_id;
-        $invoiceType->save();
-        return response()->json($invoiceType, 201);
+        $typeOfService = new TypeOfService();
+        $typeOfService->name = $request->name;
+        $typeOfService->user_created_id = $request->user_created_id;
+        $typeOfService->save();
+        return response()->json($typeOfService, 201);
     }
 
     /**
@@ -53,9 +50,9 @@ class InvoiceTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(InvoiceType $invoiceType)
+    public function show(TypeOfService $typeOfService)
     {
-        return response()->json($invoiceType, 200);
+        return response()->json($typeOfService, 200);
     }
 
     /**
@@ -64,7 +61,7 @@ class InvoiceTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(InvoiceType $invoiceType)
+    public function edit(TypeOfService $typeOfService)
     {
 
     }
@@ -76,13 +73,12 @@ class InvoiceTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, InvoiceType $invoiceType)
+    public function update(Request $request, TypeOfService $typeOfService)
     {
-        $invoiceType->name = $request->name;
-        $invoiceType->acronym_serie = $request->acronym_serie;
-        $invoiceType->user_updated_id = $request->user_updated_id;
-        $invoiceType->update();
-        return response()->json($invoiceType, 200);
+        $typeOfService->name = $request->name;
+        $typeOfService->user_updated_id = $request->user_updated_id;
+        $typeOfService->update();
+        return response()->json($typeOfService, 200);
     }
 
     /**
@@ -91,9 +87,9 @@ class InvoiceTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(InvoiceType $invoiceType)
+    public function destroy(TypeOfService $typeOfService)
     {
-        $invoiceType->delete();
-        return response()->json($invoiceType, 200);
+        $typeOfService->delete();
+        return response()->json($typeOfService, 200);
     }
 }
