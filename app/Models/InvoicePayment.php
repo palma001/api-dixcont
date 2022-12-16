@@ -11,6 +11,7 @@ class InvoicePayment extends Base
         'coin_id',
         'exchange',
         'amount',
+        'reference',
         'user_created_id',
         'user_updated_id'
     ];

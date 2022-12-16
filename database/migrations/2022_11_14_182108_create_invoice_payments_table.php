@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('invoice_id')->unsigned();
             $table->float('exchange')->default(0);
             $table->float('amount');
+            $table->float('reference')->nullable();
             $table->foreignId('user_created_id')->unsigned('users');
             $table->foreignId('user_updated_id')->nullable()->unsigned('users');
             $table->timestamps();
