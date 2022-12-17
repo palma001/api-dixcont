@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('taxes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('amount');
             $table->foreignId('user_created_id')->unsigned('users');
             $table->foreignId('user_updated_id')->nullable()->unsigned('users');
             $table->timestamps();

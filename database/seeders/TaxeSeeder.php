@@ -17,8 +17,31 @@ class TaxeSeeder extends Seeder
     {
         DB::table('taxes')->insert([
             [
-                'name' => 'igv',
-                'amount' => 12,
+                'name' => 'IGV',
+                'user_created_id' => 1
+            ],
+            [
+                'name' => 'Op. Exonerada',
+                'user_created_id' => 1
+            ],
+            [
+                'name' => 'Op. Inafectada',
+                'user_created_id' => 1
+            ],
+            [
+                'name' => 'ISC',
+                'user_created_id' => 1
+            ],
+            [
+                'name' => 'ICBPER',
+                'user_created_id' => 1
+            ],
+            [
+                'name' => 'Otros Cargos',
+                'user_created_id' => 1
+            ],
+            [
+                'name' => 'Otros Tributos',
                 'user_created_id' => 1
             ]
         ]);

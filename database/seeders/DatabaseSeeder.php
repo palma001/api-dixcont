@@ -33,11 +33,13 @@ class DatabaseSeeder extends Seeder
             TaxeSeeder::class,
             PaymentMethodSeeder::class,
             InvoiceTypeSeeder::class,
+            TypeOfServiceSeeder::class,
+            InvoiceTypeTaxeSeeder::class,
             ProductSeeder::class,
             LivingRoomSeeder::class,
             TableSeeder::class,
             ModuleSeeder::class,
-            ModuleRoleSeeder::class
+            ModuleRoleSeeder::class,
         ]);
     }
 }

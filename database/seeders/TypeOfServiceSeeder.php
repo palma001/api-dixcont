@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class InvoiceTypeSeeder extends Seeder
+class TypeOfServiceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,15 +15,17 @@ class InvoiceTypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('invoice_types')->insert([
+        DB::table('type_of_services')->insert([
             [
-                'name' => 'Boleta de venta electronica',
-                'acronym_serie' => 'B',
+                'name' => 'Delivery',
                 'user_created_id' => 1
             ],
             [
-                'name' => 'Ticket',
-                'acronym_serie' => 'T',
+                'name' => 'Local',
+                'user_created_id' => 1
+            ],
+            [
+                'name' => 'Pickup',
                 'user_created_id' => 1
             ]
         ]);
