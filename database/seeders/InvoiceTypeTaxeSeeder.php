@@ -15,7 +15,7 @@ class InvoiceTypeTaxeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('invoice_type_tax')
+        DB::table('invoice_type_taxe')
             ->insert([
                 [
                     'taxe_id' => 1,
