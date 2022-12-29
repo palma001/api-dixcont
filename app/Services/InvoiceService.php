@@ -30,4 +30,9 @@ class InvoiceService
     {
         $invoice->tables()->attach($tables);
     }
+    public function saveTaxes(Invoice $invoice, $taxes)
+    {
+        info($taxes);
+        $invoice->taxes()->attach($taxes);
+    }
 }

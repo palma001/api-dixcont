@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->float('exchange_rate')->default(0);
-            $table->float('taxe')->default(0);
             $table->foreignId('invoice_type_id')->unsigned();
             $table->foreignId('coin_id')->unsigned();
             $table->foreignId('client_id')->unsigned('users');

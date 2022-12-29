@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_tax', function (Blueprint $table) {
+        Schema::create('invoice_taxe', function (Blueprint $table) {
             $table->id();
             $table->foreignId('taxe_id')->unsigned();
             $table->foreignId('invoice_id')->unsigned();

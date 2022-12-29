@@ -17,14 +17,15 @@ class InvoiceController extends Controller
     {
         $invoices = Invoice::filters($request->all())
             ->with(
-                'client:id,name',
-                'seller:id,name',
+                'client:id,name,document_number',
+                'seller:id,name,document_number',
                 'products',
                 'coin:id,name,symbol',
                 'invoiceType:id,name',
                 'invoicePayments.paymentMethod:id,name',
                 'tables:id,name,living_room_id',
-                'tables.livingRoom'
+                'tables.livingRoom',
+                'taxes'
             )
             ->search($request->all());
         return response()->json($invoices, 200);
@@ -52,7 +53,6 @@ class InvoiceController extends Controller
         $invoice->exchange_rate = $request->exchange_rate;
         $invoice->invoice_type_id = $request->invoice_type_id;
         $invoice->coin_id = $request->coin_id;
-        $invoice->taxe = $request->taxe;
         $invoice->client_id = $request->client_id;
         $invoice->seller_id = $request->seller_id;
         $invoice->user_created_id = $request->user_created_id;
@@ -94,7 +94,6 @@ class InvoiceController extends Controller
         $invoice->exchange_rate = $request->exchange_rate;
         $invoice->invoice_type_id = $request->invoice_type_id;
         $invoice->coin_id = $request->coin_id;
-        $invoice->taxe = $request->taxe;
         $invoice->client_id = $request->client_id;
         $invoice->seller_id = $request->seller_id;
         $invoice->user_created_id = $request->user_created_id;

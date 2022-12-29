@@ -131,4 +131,14 @@ class Invoice extends Base
     {
         return $this->belongsTo(Client::class);
     }
+    /**
+     * The invoiceTaxes that belong to the Invoice
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function taxes()
+    {
+        return $this->belongsToMany(Taxe::class)
+            ->withPivot('type_taxe', 'amount');
+    }
 }
