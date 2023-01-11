@@ -14,7 +14,7 @@ class PaymentReportController extends Controller
             ->join('coins', 'coins.id', 'invoice_payments.coin_id')
             ->whereDate('invoice_payments.created_at', '>=', $request->from)
 			->whereDate('invoice_payments.created_at', '<=', $request->to)
-            ->groupBy('payment_method_id', 'coin_id', 'payment_methods.name', 'coins.name', 'coins.symbol')
+            ->groupBy('payment_method_id', 'coin_id', 'payment_methods.name', 'coins.name', 'coins.symbol', 'payment_methods.id')
             ->get();
 
        return response()->json($payments, 200);
