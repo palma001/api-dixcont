@@ -48,6 +48,7 @@ Route::group([
     $router->resource('product-images', ProductImageController::class);
     $router->resource('type-of-services', TypeOfServiceController::class);
     $router->get('exchange-rate', [ApiController::class, 'exchangeRate']);
+    $router->get('get-documents/{documentType}/{documentNumber}', [ApiController::class, 'getDocuments']);
     $router->group(['prefix' => 'reports'], function ($router) {
         $router->get('payment-totals', [PaymentReportController::class, 'getPaymentTotals']);
     });

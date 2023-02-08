@@ -96,7 +96,7 @@ class InvoiceController extends Controller
         $invoice->coin_id = $request->coin_id;
         $invoice->client_id = $request->client_id;
         $invoice->seller_id = $request->seller_id;
-        $invoice->user_created_id = $request->user_created_id;
+        $invoice->user_updated_id = $request->user_updated_id;
         $invoice->update();
         return response()->json($invoice, 200);
     }
