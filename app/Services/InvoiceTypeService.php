@@ -10,7 +10,14 @@ class InvoiceTypeService
     {
         collect($taxes)
             ->each(function ($taxe) use ($invoiceType) {
-                $invoiceType->taxes()->attach($taxe['id']);
+                $invoiceType->taxes()->attach(
+                    $taxe['id'],
+                    [
+                        'amount' => $taxe['amount'],
+                        'price' => $taxe['price'],
+                        'taxe' => 0
+                    ]
+                );
             });
     }
 }
