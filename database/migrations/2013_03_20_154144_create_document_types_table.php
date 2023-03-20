@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_taxe', function (Blueprint $table) {
+        Schema::create('document_types', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('taxe_id')->unsigned();
-            $table->foreignId('invoice_id')->unsigned();
-            $table->float('amount');
-            $table->enum('type_taxe', ['percentage', 'fixed_quantity'])->default('percentage');
+            $table->string('name');
+            $table->string('short_name');
+            $table->string('description')->nullable();
+            $table->foreignId('user_created_id')->nullable()->unsigned('users');
+            $table->foreignId('user_updated_id')->nullable()->unsigned('users');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_taxe');
+        Schema::dropIfExists('document_types');
     }
 };

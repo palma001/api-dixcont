@@ -22,6 +22,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->foreignId('role_id')->nullable()->unsigned();
+            $table->foreignId('docuemnt_type_id')
+                ->nullable()
+                ->unsigned();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

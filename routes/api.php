@@ -47,6 +47,7 @@ Route::group([
     $router->resource('taxes', TaxeController::class);
     $router->resource('product-images', ProductImageController::class);
     $router->resource('type-of-services', TypeOfServiceController::class);
+    $router->resource('document-types', DocumentTypeController::class);
     $router->get('exchange-rate', [ApiController::class, 'exchangeRate']);
     $router->get('get-documents/{documentType}/{documentNumber}', [ApiController::class, 'getDocuments']);
     $router->group(['prefix' => 'reports'], function ($router) {
