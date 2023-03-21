@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use BranchOfficeSeeder;
+use CompanySeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -27,6 +29,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            CompanySeeder::class,
+            BranchOfficeSeeder::class,
             DocumentTypeSeeder::class,
             RoleSeeder::class,
             CategorySeeder::class,

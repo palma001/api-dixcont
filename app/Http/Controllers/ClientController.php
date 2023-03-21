@@ -50,9 +50,13 @@ class ClientController extends Controller
         $client = new Client();
         $client->name = $request->name;
         $client->document_number = $request->document_number;
+        $client->phone_number = $request->phone_number;
+        $client->address = $request->address;
+        $client->document_type_id = $request->document_type_id;
         $client->username = $request->username;
         $client->role_id = $this->role->id;
         $client->email = $request->email;
+        $client->user_created_id = $request->user_created_id;
         $client->password = Hash::make($request->password);
         $client->save();
         return response()->json($client, 201);
@@ -91,10 +95,15 @@ class ClientController extends Controller
     {
         $client->name = $request->name;
         $client->document_number = $request->document_number;
+        $client->phone_number = $request->phone_number;
+        $client->address = $request->address;
+        $client->document_type_id = $request->document_type_id;
         $client->username = $request->username;
-        $client->role_id = $this->role->id;
         $client->email = $request->email;
-        $client->password = Hash::make($request->password);
+        $client->user_updated_id = $request->user_updated_id;
+         if ($request->password) {
+            $client->password = Hash::make($request->password);
+        }
         $client->update();
         return response()->json($client, 200);
     }

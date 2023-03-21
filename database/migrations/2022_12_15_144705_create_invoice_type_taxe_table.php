@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_type_tax');
+        Schema::dropIfExists('invoice_type_taxe');
     }
 };
