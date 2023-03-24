@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('purcharse_payments', function (Blueprint $table) {
             $table->id();
-            $table->float('exchange_rate')->default(0);
-            $table->boolean('status')->default(true);
-            $table->foreignId('invoice_type_id')->unsigned();
-            $table->foreignId('type_of_service_id')->unsigned();
+            $table->foreignId('payment_method_id')->unsigned();
             $table->foreignId('coin_id')->unsigned();
-            $table->foreignId('client_id')->unsigned('users');
-            $table->foreignId('seller_id')->unsigned('users');
+            $table->foreignId('purchase_id')->unsigned();
+            $table->float('exchange')->default(0);
+            $table->float('amount');
+            $table->float('reference')->nullable();
             $table->foreignId('user_created_id')->unsigned('users');
             $table->foreignId('user_updated_id')->nullable()->unsigned('users');
             $table->timestamps();
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('purcharse_payments');
     }
 };
