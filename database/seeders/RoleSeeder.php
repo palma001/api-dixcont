@@ -30,6 +30,11 @@ class RoleSeeder extends Seeder
                 'name' => 'Cliente',
                 'acronym' => 'CLI',
                 'user_created_id' => 1
+            ],
+            [
+                'name' => 'Proveedor',
+                'acronym' => 'PRO',
+                'user_created_id' => 1
             ]
         ]);
     }
