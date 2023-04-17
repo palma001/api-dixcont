@@ -2,20 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PurcharseResource;
 use App\Models\Purcharse;
-use App\Http\Requests\StorePurcharseRequest;
-use App\Http\Requests\UpdatePurcharseRequest;
+use Illuminate\Http\Request;
 
-class PurcharseController extends Controller
+class InvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $purcharses = Purcharse::filters($request->all())
+            ->with(
+                'provider:id,name,document_number',
+                'products',
+                'coin:id,name,symbol',
+                'invoiceType:id,name',
+                'purchasePayments.paymentMethod:id,name'
+            )
+            ->search($request->all());
+        return response()->json($purcharses, 200);
     }
 
     /**
@@ -31,56 +40,70 @@ class PurcharseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePurcharseRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePurcharseRequest $request)
+    public function store(Request $request)
     {
-        //
+        $purcharse = new Purcharse();
+        $purcharse->exchange_rate = $request->exchange_rate;
+        $purcharse->invoice_type_id = $request->invoice_type_id;
+        $purcharse->coin_id = $request->coin_id;
+        $purcharse->provider_id = $request->provider_id;
+        $purcharse->user_created_id = $request->user_created_id;
+        $purcharse->save();
+        return new PurcharseResource($purcharse);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Purcharse  $purcharse
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(Purcharse $purcharse)
     {
-        //
+        return new PurcharseResource($purcharse);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Purcharse  $purcharse
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Purcharse $purcharse)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePurcharseRequest  $request
-     * @param  \App\Models\Purcharse  $purcharse
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePurcharseRequest $request, Purcharse $purcharse)
+    public function update(Request $request, Purcharse $purcharse)
     {
-        //
+        $purcharse->exchange_rate = $request->exchange_rate;
+        $purcharse->invoice_type_id = $request->invoice_type_id;
+        $purcharse->coin_id = $request->coin_id;
+        $purcharse->provider_id = $request->provider_id;
+        $purcharse->user_updated_id = $request->user_updated_id;
+        $purcharse->update();
+        return response()->json($purcharse, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Purcharse  $purcharse
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Purcharse $purcharse)
     {
-        //
+        $purcharse->delete();
+        return response()->json($purcharse, 200);
     }
 }

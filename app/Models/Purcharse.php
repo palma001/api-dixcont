@@ -43,4 +43,14 @@ class Purcharse extends Base
     {
         return $this->belongsTo(Coin::class);
     }
+
+    /**
+     * Get all of the purchasePayments for the Purcharse
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function purchasePayments()
+    {
+        return $this->hasMany(PurcharsePayment::class);
+    }
 }

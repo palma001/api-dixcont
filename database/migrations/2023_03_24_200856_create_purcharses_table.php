@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('purcharses', function (Blueprint $table) {
             $table->id();
+            $table->integer('code')->default(1);
+            $table->integer('code_bill')->default(1);
             $table->float('exchange_rate')->default(0);
             $table->boolean('status')->default(true);
             $table->foreignId('invoice_type_id')->unsigned();
