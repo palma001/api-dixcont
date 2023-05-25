@@ -2,10 +2,55 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Purcharse extends Model
+class Purcharse extends Base
 {
-    use HasFactory;
+    /**
+     * Get the provider that owns the Purcharse
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function provider()
+    {
+        return $this->belongsTo(Provider::class);
+    }
+
+    /**
+     * The products that belong to the Purcharse
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
+
+    /**
+     * Get the invoiceType that owns the Purcharse
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function invoiceType()
+    {
+        return $this->belongsTo(InvoiceType::class);
+    }
+
+    /**
+     * Get the coin that owns the Purcharse
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function coin()
+    {
+        return $this->belongsTo(Coin::class);
+    }
+
+    /**
+     * Get all of the purchasePayments for the Purcharse
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function purchasePayments()
+    {
+        return $this->hasMany(PurcharsePayment::class);
+    }
 }
