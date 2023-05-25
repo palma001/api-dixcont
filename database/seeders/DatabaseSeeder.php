@@ -3,9 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
-use BranchOfficeSeeder;
-use CompanySeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
