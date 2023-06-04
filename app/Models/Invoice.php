@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Invoice extends Base
 {
@@ -41,13 +44,13 @@ class Invoice extends Base
      */
     public function getTotalTaxeAttribute()
     {
-        return round(($this->taxe * $this->tax_base) / 100, 2);
+        return round((0 * $this->tax_base) / 100, 2);
     }
     /**
      * Get invoice taxe
      * @return float
      */
-    public function getDateAttribute()
+    public function getDateAttribute(): String
     {
         return Carbon::parse($this->created_at)->format('Y-m-d');
     }
@@ -55,7 +58,7 @@ class Invoice extends Base
      * Get invoice taxe
      * @return float
      */
-    public function getHourAttribute()
+    public function getHourAttribute(): String
     {
         return Carbon::parse($this->created_at)->format('H:m:s');
     }
@@ -72,17 +75,17 @@ class Invoice extends Base
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function products()
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class)
-            ->withPivot('amount', 'price', 'taxe');
+            ->withPivot('amount', 'price');
     }
     /**
      * Get the coin that owns the Invoice
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function coin()
+    public function coin(): BelongsTo
     {
         return $this->belongsTo(Coin::class);
     }
@@ -91,7 +94,7 @@ class Invoice extends Base
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function invoiceType()
+    public function invoiceType(): BelongsTo
     {
         return $this->belongsTo(InvoiceType::class);
     }
@@ -100,7 +103,7 @@ class Invoice extends Base
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function invoicePayments()
+    public function invoicePayments(): HasMany
     {
         return $this->hasMany(InvoicePayment::class);
     }
@@ -109,7 +112,7 @@ class Invoice extends Base
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function tables()
+    public function tables(): BelongsToMany
     {
         return $this->belongsToMany(Table::class);
     }
@@ -118,7 +121,7 @@ class Invoice extends Base
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function seller()
+    public function seller(): BelongsTo
     {
         return $this->belongsTo(Seller::class);
     }
@@ -127,7 +130,7 @@ class Invoice extends Base
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function client()
+    public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }
@@ -136,7 +139,7 @@ class Invoice extends Base
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function taxes()
+    public function taxes(): BelongsToMany
     {
         return $this->belongsToMany(Taxe::class)
             ->withPivot('type_taxe', 'amount');

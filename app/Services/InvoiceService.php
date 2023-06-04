@@ -14,8 +14,7 @@ class InvoiceService
                     $product['id'],
                     [
                         'amount' => $product['amount'],
-                        'price' => $product['price'],
-                        'taxe' => 0
+                        'price' => $product['price']
                     ]
                 );
             });

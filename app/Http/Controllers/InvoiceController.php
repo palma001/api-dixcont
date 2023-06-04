@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\InvoiceResource;
 use App\Models\Invoice;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -13,7 +14,7 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         $invoices = Invoice::filters($request->all())
             ->with(
@@ -47,7 +48,7 @@ class InvoiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): InvoiceResource
     {
         $invoice = new Invoice();
         $invoice->exchange_rate = $request->exchange_rate;
@@ -55,6 +56,7 @@ class InvoiceController extends Controller
         $invoice->coin_id = $request->coin_id;
         $invoice->client_id = $request->client_id;
         $invoice->seller_id = $request->seller_id;
+        $invoice->type_of_service_id = $request->type_of_service_id;
         $invoice->user_created_id = $request->user_created_id;
         $invoice->save();
         return new InvoiceResource($invoice);
@@ -66,7 +68,7 @@ class InvoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Invoice $invoice)
+    public function show(Invoice $invoice): InvoiceResource
     {
         return new InvoiceResource($invoice);
     }
@@ -89,13 +91,14 @@ class InvoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Invoice $invoice)
+    public function update(Request $request, Invoice $invoice): JsonResponse
     {
         $invoice->exchange_rate = $request->exchange_rate;
         $invoice->invoice_type_id = $request->invoice_type_id;
         $invoice->coin_id = $request->coin_id;
         $invoice->client_id = $request->client_id;
         $invoice->seller_id = $request->seller_id;
+        $invoice->type_of_service_id = $request->type_of_service_id;
         $invoice->user_updated_id = $request->user_updated_id;
         $invoice->update();
         return response()->json($invoice, 200);
@@ -107,7 +110,7 @@ class InvoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invoice $invoice)
+    public function destroy(Invoice $invoice): JsonResponse
     {
         $invoice->delete();
         return response()->json($invoice, 200);
